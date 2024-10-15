@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 
 
 class GraphCenter():
+    _group_list = [182826238, 170609622, 273594586, 332501512, 197466399]
+
     def __init__(
             self, 
             find_closeness_centrality=True, 
@@ -66,18 +68,24 @@ class GraphCenter():
 
     def _end(self):
         if self.find_closeness_centrality:
+            print("Центральность по близости группы:")
+            self._print_result_for_group(self._group_list, self.closeness_centrality)
             max_closeness_node = max(self.closeness_centrality, key=self.closeness_centrality.get)
             print("Максимальная центральность по близости:")
             print(f"ID узла: {max_closeness_node}, Значение: {self.closeness_centrality[max_closeness_node]}")
             print()
 
         if self.find_betweenness_centrality:
+            print("Центральность по посредничеству группы:")
+            self._print_result_for_group(self._group_list, self.betweenness_centrality)
             max_betweenness_node = max(self.betweenness_centrality, key=self.betweenness_centrality.get)
             print("Максимальная центральность по посредничеству:")
             print(f"ID узла: {max_betweenness_node}, Значение: {self.betweenness_centrality[max_betweenness_node]}")
             print()
 
         if self.find_eigenvector_centrality:
+            print("Центральность по собственному значению группы:")
+            self._print_result_for_group(self._group_list, self.eigenvector_centrality)
             max_eigenvector_node = max(self.eigenvector_centrality, key=self.eigenvector_centrality.get)
             print("Максимальная центральность по собственному значению:")
             print(f"ID узла: {max_eigenvector_node}, Значение: {self.eigenvector_centrality[max_eigenvector_node]}")
@@ -85,6 +93,16 @@ class GraphCenter():
 
         if self.draw_graph:
             self._draw_graph(self.graph)
+
+
+    @staticmethod
+    def _print_result_for_group(group_list, data):
+        try:
+            for node in group_list:
+                print(f"ID узла: {node}, Значение:{data[str(node)]}")
+            print('-' * 50)
+        except:
+            pass
 
 
     @staticmethod

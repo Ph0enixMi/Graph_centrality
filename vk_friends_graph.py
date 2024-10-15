@@ -51,7 +51,7 @@ class VkGraph:
 
         cleaned_data = {}
         for key, value in self._friends_data.items():
-            cleaned_value = [element for element in value if element in elements_to_keep]
+            cleaned_value = [element for element in value if element in elements_to_keep or element in self.profiles_id]
             if len(cleaned_value) > 1:
                 cleaned_data[key] = cleaned_value
 
